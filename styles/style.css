@@ -1,0 +1,106 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url(../images/background.jpg);
+  background-position: center;
+  background-size: cover;
+  min-block-size: 100vh;
+}
+
+.slider__container {
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+  inline-size: 55%;
+}
+
+.slider__img-container {
+  position: relative;
+  border: 1px solid #000;
+  inline-size: 100%;
+  aspect-ratio: 16 / 9;
+}
+
+.slider__list {
+  display: flex;
+  justify-content: flex-start;
+  overflow: hidden;
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+.slider__list-item {
+  min-inline-size: 100%;
+  block-size: 100%;
+  transition: transform 0.3s linear;
+}
+
+.slider__img {
+  /* display: none; */
+  object-fit: cover;
+  object-position: center;
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+.slider__img_active {
+  display: block;
+}
+
+.slider-button {
+  position: absolute;
+  top: calc(50% - calc(var(--slide-button-size, 100px) / 2));
+  border: 1px solid #000;
+  border-radius: 100%;
+  background-color: #fff;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 60%;
+  cursor: pointer;
+  appearance: none;
+  inline-size: var(--slide-button-size, 100px);
+  aspect-ratio: 1 / 1;
+  translate: 0;
+}
+
+.slider-button_previous {
+  left: calc((var(--slide-button-size, 50px) / 2) * -1);
+  background-image: url(../images/left_arrow.png);
+}
+
+.slider-button_next {
+  left: calc(100% - (var(--slide-button-size, 50px) / 2));
+  background-image: url(../images/right_arrow.png);
+}
+
+.slider-button_previous:hover {
+  box-shadow: -4px 0 3px rgba(0 0 0 / 0.4);
+}
+
+.slider-button_next:hover {
+  box-shadow: 4px 0 3px rgba(0 0 0 / 0.4);
+}
+
+.slider-button:active {
+  transition: translate 0.03s linear;
+  translate: 0 5px;
+}
+
+.dot__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+
+.dot {
+  border-radius: 100%;
+  background-color: rgba(128 128 128 / 0.5);
+  inline-size: 55px;
+  aspect-ratio: 1 / 1;
+}
+
+.dot_active {
+  background-color: rgba(0 0 0 / 0.4);
+}
