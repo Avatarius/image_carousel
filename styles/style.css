@@ -21,19 +21,28 @@ body {
   aspect-ratio: 16 / 9;
 }
 
+.slider__list-container {
+  inline-size: 100%;
+  block-size: 100%;
+  overflow: hidden;
+}
+
 .slider__list {
   display: flex;
   justify-content: flex-start;
-  overflow: hidden;
-  inline-size: 100%;
-  block-size: 100%;
+  /* overflow: hidden; */
+  inline-size: inherit;
+  block-size: inherit;
   border-radius: 30px;
+}
+
+.slider__list_transition {
+  transition: transform 0.3s ease-in-out;
 }
 
 .slider__list-item {
   min-inline-size: 100%;
   block-size: 100%;
-  transition: transform 0.3s linear;
 }
 
 .slider__img {

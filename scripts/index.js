@@ -2,7 +2,7 @@
 
 const sliderList = document.querySelector('.slider__list');
 const slides = document.querySelectorAll(".slider__list-item");
-let currentSlide = 0;
+let currentSlide = 1;
 
 const dotContainer = document.querySelector(".dot__container");
 const dotArray = Array.from(document.querySelectorAll(".dot"));
@@ -10,17 +10,22 @@ const dotArray = Array.from(document.querySelectorAll(".dot"));
 const previousButton = document.querySelector(".slider-button_previous");
 const nextButton = document.querySelector(".slider-button_next");
 
-nextButton.addEventListener("click", next);
-previousButton.addEventListener("click", previous);
-dotContainer.addEventListener("click", function (evt) {
+const cloneFirst = slides[0].cloneNode(true);
+const cloneLast = slides[slides.length - 1].cloneNode(true);
+sliderList.prepend(cloneLast);
+sliderList.append(cloneFirst);
+
+nextButton.addEventListener("click", handleSlide);
+previousButton.addEventListener("click", handleSlide);
+/* dotContainer.addEventListener("click", function (evt) {
   const index = dotArray.indexOf(evt.target);
   if (index !== -1) {
     showSlide(index);
     activateDot(index);
     currentSlide = index;
   }
-});
-document.addEventListener('keydown', function(evt) {
+}); */
+/* document.addEventListener('keydown', function(evt) {
   if (evt.key === 'ArrowLeft') previous();
   if (evt.key === 'ArrowRight') next();
 });
@@ -28,14 +33,11 @@ sliderList.addEventListener('wheel', function(evt) {
   console.log(evt.wheelDelta);
   if (evt.deltaY < 0) next();
   if (evt.deltaY > 0) previous();
-})
+}) */
 
 
 function showSlide(index) {
-  slides.forEach((item, i) => {
-    const imgWidth = item.clientWidth;
-    item.style.transform = `translateX(${-imgWidth * index}px)`;
-  });
+  sliderList.style.transform = `translateX(-${100 * index}%)`;
 }
 
 function activateDot(index) {
@@ -48,14 +50,33 @@ function activateDot(index) {
   });
 }
 
-function next() {
-  currentSlide = (currentSlide + 1) % slides.length;
-  showSlide(currentSlide);
-  activateDot(currentSlide);
-}
 
-function previous() {
-  currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+function handleSlide(evt) {
+  sliderList.classList.add('slider__list_transition');
+  if (evt.target === previousButton) {
+    currentSlide--;
+  }
+  if (evt.target === nextButton) {
+    currentSlide++;
+  }
   showSlide(currentSlide);
   activateDot(currentSlide);
+
+
 }
+showSlide(currentSlide);
+
+sliderList.addEventListener('transitionend', () => {
+  const slidesArray = document.querySelectorAll(".slider__list-item");
+
+  if (currentSlide === 0) {
+    sliderList.classList.remove('slider__list_transition');
+    currentSlide = slidesArray.length - 2;
+  }
+  if (currentSlide >= slidesArray.length - 1) {
+    sliderList.classList.remove('slider__list_transition');
+    currentSlide = 1;
+  }
+  showSlide(currentSlide);
+  activateDot(currentSlide);
+})
