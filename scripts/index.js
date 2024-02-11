@@ -1,5 +1,6 @@
 `use strict`;
 
+const sliderList = document.querySelector('.slider__list');
 const slides = document.querySelectorAll(".slider__list-item");
 let currentSlide = 0;
 
@@ -23,6 +24,12 @@ document.addEventListener('keydown', function(evt) {
   if (evt.key === 'ArrowLeft') previous();
   if (evt.key === 'ArrowRight') next();
 });
+sliderList.addEventListener('wheel', function(evt) {
+  console.log(evt.wheelDelta);
+  if (evt.deltaY < 0) next();
+  if (evt.deltaY > 0) previous();
+})
+
 
 function showSlide(index) {
   slides.forEach((item, i) => {

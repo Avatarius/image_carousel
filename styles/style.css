@@ -11,16 +11,14 @@ body {
 .slider__container {
   display: flex;
   flex-direction: column;
-  gap: 80px;
-  inline-size: 55%;
+  gap: 40px;
+  inline-size: 40%;
 }
 
 .slider__img-container {
   position: relative;
-  /* border: 1px solid #000; */
   inline-size: 100%;
   aspect-ratio: 16 / 9;
-
 }
 
 .slider__list {
@@ -29,15 +27,13 @@ body {
   overflow: hidden;
   inline-size: 100%;
   block-size: 100%;
-  border-radius: 60px;
+  border-radius: 30px;
 }
 
 .slider__list-item {
   min-inline-size: 100%;
   block-size: 100%;
   transition: transform 0.3s linear;
-
-
 }
 
 .slider__img {
@@ -45,7 +41,7 @@ body {
   object-position: center;
   inline-size: 100%;
   block-size: 100%;
-  border-radius: 60px;
+  border-radius: 30px;
 }
 
 .slider__img_active {
@@ -95,13 +91,13 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 30px;
+  gap: 20px;
 }
 
 .dot {
   border-radius: 100%;
   background-color: rgba(128 128 128 / 0.5);
-  inline-size: 55px;
+  inline-size: 20px;
   aspect-ratio: 1 / 1;
 }
 
