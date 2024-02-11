@@ -19,13 +19,14 @@ dotContainer.addEventListener('click', function(evt) {
   if (index !== -1) {
     showSlide(index);
     activateDot(index);
+    currentSlide = index;
   }
 })
 
 
 function showSlide(index) {
-  console.log(index);
-  slides.forEach( (item) => {
+  slides.forEach( (item, i) => {
+    console.log(currentSlide);
     const imgWidth = item.clientWidth;
     item.style.transform = `translateX(${-imgWidth * index}px)`;
   } )
