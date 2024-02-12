@@ -25,15 +25,8 @@ previousButton.addEventListener("click", handleSlide);
     currentSlide = index;
   }
 }); */
-/* document.addEventListener('keydown', function(evt) {
-  if (evt.key === 'ArrowLeft') previous();
-  if (evt.key === 'ArrowRight') next();
-});
-sliderList.addEventListener('wheel', function(evt) {
-  console.log(evt.wheelDelta);
-  if (evt.deltaY < 0) next();
-  if (evt.deltaY > 0) previous();
-}) */
+document.addEventListener('keydown', handleSlide);
+sliderList.addEventListener('wheel', handleSlide);
 
 
 function showSlide(index) {
@@ -41,35 +34,40 @@ function showSlide(index) {
 }
 
 function activateDot(index) {
-  dotArray.forEach((item, i) => {
+
+  /* dotArray.forEach((item, i) => {
     if (i === index) {
       item.classList.add("dot_active");
     } else {
       item.classList.remove("dot_active");
     }
-  });
+  }); */
+
 }
 
 
 function handleSlide(evt) {
   sliderList.classList.add('slider__list_transition');
-  if (evt.target === previousButton) {
+  if (evt.target === previousButton || evt.key === 'ArrowLeft' || (evt.deltaY > 0)) {
     currentSlide--;
   }
-  if (evt.target === nextButton) {
+  if (evt.target === nextButton || evt.key === 'ArrowRight' || evt.deltaY < 0) {
     currentSlide++;
   }
+
+
   showSlide(currentSlide);
   activateDot(currentSlide);
 
 
 }
-showSlide(currentSlide);
+
 
 sliderList.addEventListener('transitionend', () => {
+  console.log(currentSlide);
   const slidesArray = document.querySelectorAll(".slider__list-item");
 
-  if (currentSlide === 0) {
+  if (currentSlide <= 0) {
     sliderList.classList.remove('slider__list_transition');
     currentSlide = slidesArray.length - 2;
   }
@@ -80,3 +78,6 @@ sliderList.addEventListener('transitionend', () => {
   showSlide(currentSlide);
   activateDot(currentSlide);
 })
+
+
+showSlide(currentSlide);
